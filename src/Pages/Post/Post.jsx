@@ -2,40 +2,37 @@ import { IoMdVideocam } from "react-icons/io";
 import { IoDocumentAttach, IoImage } from "react-icons/io5";
 import UseAuth from "../../Hook/useAuth";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
 
 const Post = () => {
-
     const { user } = UseAuth();
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
-    const [requestDate, setRequestDate] = useState(new Date().toISOString().slice(0, 10));
-    const onSubmit = (data) => {
-        console.log(data)
-        axios.post('http://localhost:5000/allPost', data, {
+    const [requestDate, setRequestDate] = useState(new Date().toISOString().slice(0, 16));
+    console.log(new Date().toISOString().slice(0, 16))
+    const onSubmit = async (data) => {
+        console.log(data);
+        await axios.post('http://localhost:5000/allPost', data, {
             headers: {
                 "Content-Type": 'Application/json'
             }
-        })
+        });
 
-        reset();
+        reset({ postContent: "" });
         document.getElementById('my_modal_5').close();
+        queryClient.invalidateQueries('posts'); 
     };
 
-
-
-    useEffect(() => {
-        setRequestDate(new Date().toISOString().slice(0, 10));
+    const openModal = () => {
         if (user) {
             setValue('poster_email', user.email || '');
             setValue('poster_image', user.photoURL || '');
             setValue('Post_date', requestDate || '');
             setValue('poster_Name', user.displayName || '');
-
-
         }
-
-    }, [user, setValue]);
+        document.getElementById('my_modal_5').showModal();
+    };
 
     return (
         <div className="bg-[#111827] text-[#fff] rounded-t-xl p-4">
@@ -48,13 +45,13 @@ const Post = () => {
                     />
                 </div>
                 <fieldset
-                    onClick={() => document.getElementById('my_modal_5').showModal()}
+                    onClick={openModal}
                     className="w-full space-y-1 py-5 px-3 cursor-pointer dark:text-gray-800"
                 >
                     <label htmlFor="Search" className="hidden">Search</label>
                     <div className="relative">
                         <input
-                            placeholder={`What's on your mind? ${user.d}`} 
+                            placeholder={`What's on your mind? ${user.displayName}`} 
                             className="text-[#111827] w-full px-3 bg-slate-200 rounded-3xl h-14"
                             type="text"
                             readOnly
@@ -73,7 +70,7 @@ const Post = () => {
             <dialog id="my_modal_5" className="modal text-[#111827] modal-bottom sm:modal-middle">
                 <div className="modal-box bg-gray-800 text-white rounded-lg p-6">
                     <div>
-                        <div className="flex item center gap-4 mb-5">
+                        <div className="flex items-center gap-4 mb-5">
                             <img
                                 alt="User Avatar"
                                 className="w-12 h-12 rounded-full ring-2 ring-offset-4 bg-gray-500 dark:ring-violet-600 dark:ring-offset-gray-100"
@@ -81,7 +78,6 @@ const Post = () => {
                             />
                             <h1 className="text-2xl font-bold ">{user.displayName}</h1>
                         </div>
-                        <div></div>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                         <div className="w-full mb-4">
@@ -96,23 +92,10 @@ const Post = () => {
                                 <p className="text-red-500 mt-1">{errors.postContent.message}</p>
                             )}
                         </div>
-                        <div className="form-control hidden w-[100%] ">
-                            
-                            <input disabled type="email" placeholder="User Email" className="input  input-bordered" {...register('user_email')} />
-                        </div>
-                        <div className="form-control hidden w-[100%] ">
-                           
-                            <input disabled type="text" placeholder="User image" className="input input-bordered" {...register('user_image')} />
-                        </div>
-
-                        <div className="form-control hidden w-[100%]">
-                            
-                            <input disabled type="text" value={requestDate} className="input input-bordered" {...register('request_date')} />
-                        </div>
-                        <div className="form-control hidden w-[100%]">
-                            
-                            <input disabled type="text" value={requestDate} className="input input-bordered" {...register('poster_image')} />
-                        </div>
+                        <input type="hidden" {...register('poster_email')} />
+                        <input type="hidden" {...register('poster_image')} />
+                        <input type="hidden" {...register('Post_date')} />
+                        <input type="hidden" {...register('poster_Name')} />
                         <div className="flex items-center justify-around">
                             <button
                                 type="submit"
@@ -125,13 +108,11 @@ const Post = () => {
                             </form>
                         </div>
                     </form>
-
                 </div>
             </dialog>
             <div className="w-[100%] flex justify-center items-center">
-            <hr className='-ml-0 h-[0.5px] border-none bg-slate-600  w-[100%] mx-auto'  />
+                <hr className='-ml-0 h-[0.5px] border-none bg-slate-600  w-[100%] mx-auto' />
             </div>
-           
         </div>
     );
 };
@@ -143,4 +124,12 @@ const PostOption = ({ icon, label }) => (
     </div>
 );
 
-export default Post;
+const queryClient = new QueryClient();
+
+const PostWithQueryClient = () => (
+    <QueryClientProvider client={queryClient}>
+        <Post />
+    </QueryClientProvider>
+);
+
+export default PostWithQueryClient;

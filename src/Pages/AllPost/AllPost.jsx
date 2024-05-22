@@ -1,11 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import SinglePost from './SinglePost';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const AllPost = () => {
-  const [posts, setPosts] = useState([]); // Initialize posts state as an empty array
-
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['AllPost'],
     queryFn: async () => {
       const res = await fetch('http://localhost:5000/allPost');
@@ -13,15 +11,16 @@ const AllPost = () => {
         throw new Error('Network response was not ok');
       }
       return res.json();
-    },
+    }
   });
 
-  // Update posts state when data changes
   useEffect(() => {
-    if (data) {
-      setPosts(data);
-    }
-  }, [data]);
+    const interval = setInterval(() => {
+      refetch();
+    }, 1000); // Set auto-refresh interval to 1 second
+
+    return () => clearInterval(interval); // Clean up the interval on component unmount
+  }, [refetch]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -31,11 +30,9 @@ const AllPost = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  console.log(posts);
-
   return (
     <div className='bg-[#111827]'>
-      {posts.map(post => (
+      {data.map(post => (
         <SinglePost key={post._id} post={post} />
       ))}
     </div>

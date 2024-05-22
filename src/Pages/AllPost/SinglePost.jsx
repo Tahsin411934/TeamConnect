@@ -1,7 +1,7 @@
 import { BiLike } from "react-icons/bi";
 
-const SinglePost = ({ post, addPost }) => {
-    console.log(addPost)
+const SinglePost = ({ post }) => {
+   
     return (
         <div className="pt-10">
             <div className="rounded-md shadow-md   w-[90%] mx-auto   b  bg-[#0D2136] dark:bg-gray-50 text-gray-100 dark:text-gray-800">
