@@ -7,7 +7,7 @@ const Navbar = () => {
     return (
         <div>
             <div className="shadow-xl -mb-1 rounded-2xl bg-[#111827] text-[#ffffff] flex items-center lg:gap-20 gap-3">
-                <img src="https://i.ibb.co/12f92xq/logo-search-grid-1x-removebg-preview.png" alt="" width={140} />
+                <img src="https://i.ibb.co/pW3XSyd/logo-search-grid-1x-2-removebg-preview.png" alt="" width={140} />
 
                 <div >
                

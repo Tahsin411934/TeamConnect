@@ -4,13 +4,19 @@ import UseAuth from "../../Hook/useAuth";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Post = () => {
     const { user } = UseAuth();
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
-    const [requestDate, setRequestDate] = useState(new Date().toISOString().slice(0, 16));
-    console.log(new Date().toISOString().slice(0, 16))
+    const [requestDate, setRequestDate] = useState(new Date().toISOString().slice(0, 19));
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setRequestDate(new Date().toISOString().slice(0, 19));
+        }, 1000); // Update requestDate every second
+        return () => clearInterval(interval); // Cleanup interval on unmount
+    }, []);
+    console.log(new Date().toISOString().slice(0, 19))
     const onSubmit = async (data) => {
         console.log(data);
         await axios.post('http://localhost:5000/allPost', data, {
@@ -21,7 +27,7 @@ const Post = () => {
 
         reset({ postContent: "" });
         document.getElementById('my_modal_5').close();
-        queryClient.invalidateQueries('posts'); 
+        queryClient.invalidateQueries('posts');
     };
 
     const openModal = () => {
@@ -51,7 +57,7 @@ const Post = () => {
                     <label htmlFor="Search" className="hidden">Search</label>
                     <div className="relative">
                         <input
-                            placeholder={`What's on your mind? ${user.displayName}`} 
+                            placeholder={`What's on your mind? ${user.displayName}`}
                             className="text-[#111827] w-full px-3 bg-slate-200 rounded-3xl h-14"
                             type="text"
                             readOnly
