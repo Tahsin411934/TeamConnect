@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import UseAuth from "../../../Hook/useAuth";
+import SignupContent from "./SignupContent";
 
 
 
@@ -41,31 +42,31 @@ const Signup = () => {
       setPassError('Password must contain at least one lower letter');
       return;
     }
-//create functionality
-    // createUser(data.email, data.password)
-    //   .then((userCredential) => {
-    //     setLoading(false);
-    //     const user = userCredential.user;
-    //     updateUserProfile(data.name, data.photoURL)
-    //       .then(() => {
-    //         setUser({
-    //           ...user,
-    //           displayName: data.name,
-    //           photoURL: data.photoURL,
-    //         });
-    //         toast.success("Registration successful");
-    //         reset();
+// create user functionality
+    createUser(data.email, data.password)
+      .then((userCredential) => {
+        setLoading(false);
+        const user = userCredential.user;
+        updateUserProfile(data.name, data.photoURL)
+          .then(() => {
+            setUser({
+              ...user,
+              displayName: data.name,
+              photoURL: data.photoURL,
+            });
+            toast.success("Registration successful");
+            reset();
             
-    //       })
-    //       .catch(() => {
+          })
+          .catch(() => {
             
-    //       });
-    //       navigate("/");
-    //   })
-    //   .catch((error) => {
-    //     setPassError(error.message);
-    //     toast.error(error.message);
-    //   });
+          });
+          navigate("/");
+      })
+      .catch((error) => {
+        setPassError(error.message);
+        toast.error(error.message);
+      });
   };
 
 
@@ -75,15 +76,17 @@ const Signup = () => {
  }
 
   return (
-    <div className="font-Poppins">
-      <div className="pt-5"></div>
+    <div className="grid grid-cols-2 items-center justify-center bg-[#0D2136] ">
+      <div className="pt-5">
+        <SignupContent/>
+      </div>
       <div className="w-[35rem] mx-auto shadow-2xl bg-[#fff] rounded-lg pt-5">
         <Helmet>
           <title>PlateSwap | Signup</title>
         </Helmet>
         <h1 className="pt-5 text-center text-2xl font-bold italic">
         Welcome To  <span className=" font-bold text-[#218b31]">Plate</span> <span className="font-bold">Swap!</span>
-        {/* <h1 className="text-base text-[#424242] font-normal mt-1">Welcome to <span className=" font-bold text-[#218b31]">Plate</span> <span className="font-bold">Swap!</span>  Sign Up to Start Your Journey</h1> */}
+        <h1 className="text-base text-[#424242] font-normal mt-1">Welcome to <span className=" font-bold text-[#218b31]">Plate</span> <span className="font-bold">Swap!</span>  Sign Up to Start Your Journey</h1>
       </h1>
         
        

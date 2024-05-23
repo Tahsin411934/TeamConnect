@@ -12,13 +12,13 @@ const Navbar = () => {
                 <div >
                
                     <div className="lg:flex hidden items-center justify-center ">
-                    <NavLink>
+                    <NavLink to='/' >
                         <div className="mr-10 font-bold text-base text-center flex-col justify-center items-center hover:bg-[#0D2136] rounded-xl p-3 ">
                             <div className="flex justify-center items-center"><IoHome /></div>
                             <h1>Home</h1>
                         </div>
                         </NavLink>
-                        <NavLink>
+                        <NavLink to='/network'>
                         <div className="mr-10 text-center font-bold text-base flex-col justify-center items-center hover:bg-[#0D2136] rounded-xl p-3 ">
                             <div className="flex justify-center items-center"><IoGitNetwork /></div>
                             <h1>Network</h1>

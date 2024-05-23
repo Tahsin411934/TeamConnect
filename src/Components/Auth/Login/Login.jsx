@@ -5,6 +5,7 @@ import { useState } from "react";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import Swal from "sweetalert2";
 import UseAuth from "../../../Hook/useAuth";
+import LoginContent from "./LoginContent";
 
 
 
@@ -45,26 +46,30 @@ const Login = () => {
   };
 
   return (
-    <div className='font-Poppins'>
-      <div className="pt-5"></div>
-    <div className="w-[80%] lg:w-[40%] mx-auto shadow-2xl bg-[#fff] rounded-lg pt-5">
+    <div className='h-[650px] bg-[#111827]  '>
+      <div className="pt-5  ">
+      
+      </div>
+    <div className="w-[80%] lg:w-[40%]  mx-auto shadow-2xl bg-[#111827] rounded-lg ">
       <Helmet>
         <title>PlatSawp | Login </title>
       </Helmet>
-      <h1 className=" text-center  text-2xl font-bold italic">
+      <div className="flex items-center justify-center">
+       <img src="https://i.ibb.co/pW3XSyd/logo-search-grid-1x-2-removebg-preview.png" alt="" width={240} />
+       </div>
+      <h1 className=" text-center -mt-9 text-2xl text-[#a1c9bc] font-bold italic">
         Welcome Back 
-        <h1 className="text-base text-[#424242] font-Montserrat font-normal mt-1">Welcome to <span className=" font-bold text-[#218b31]">Plate</span> <span className="font-bold">Swap!</span>  Sign In to continue</h1>
-      </h1>
+       </h1>
       <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-control">
           {error && <p className="text-red-500">{error}</p>}
           <label className="label">
-            <span className="label-text">Email</span>
+            <span className="label-text text-[#a1c9bc]">Email</span>
           </label>
           <input
             type="email"
             placeholder="Email"
-            className="input input-bordered"
+            className="input input-bordered bg-slate-600"
             {...register("email", { required: true })}
           />
           {errors.name && (
@@ -74,12 +79,12 @@ const Login = () => {
 
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Password</span>
+            <span className="label-text text-[#a1c9bc]">Password</span>
           </label>
           <input
             type="password"
             placeholder="Password"
-            className="input input-bordered"
+            className="input bg-slate-600 input-bordered"
             {...register("password", {
               required: true,
             })}
@@ -90,17 +95,18 @@ const Login = () => {
         </div>
 
         <div className="form-control mt-6">
-          <button type="submit" className="btn text-[#fff] bg-[#218b31]">
+          <button type="submit" className="btn hover:bg-slate-900 text-[#fff] bg-[#0D2136]">
             Sign In
           </button>
         </div>
-        <div className="flex  items-center ">
+        <div className="flex  items-center text-[#a1c9bc] ">
           <p>New User?</p>
           <Link to="/signup">
-            <button className="btn text-[#218b31] bg-slate-100">SignUp</button>
+            <button className=" text-[#a1c9bc] bg-transparent ">SignUp</button>
           </Link>
         </div>
         <SocialLogin></SocialLogin>
+        
       </form>
     </div>
     </div>

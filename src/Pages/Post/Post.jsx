@@ -16,7 +16,7 @@ const Post = () => {
         }, 1000); // Update requestDate every second
         return () => clearInterval(interval); // Cleanup interval on unmount
     }, []);
-    console.log(new Date().toISOString().slice(0, 19))
+    // console.log(new Date().toISOString().slice(0, 19))
     const onSubmit = async (data) => {
         console.log(data);
         await axios.post('http://localhost:5000/allPost', data, {
@@ -27,7 +27,7 @@ const Post = () => {
 
         reset({ postContent: "" });
         document.getElementById('my_modal_5').close();
-        queryClient.invalidateQueries('posts');
+        // queryClient.invalidateQueries('posts');
     };
 
     const openModal = () => {
@@ -36,6 +36,7 @@ const Post = () => {
             setValue('poster_image', user.photoURL || '');
             setValue('Post_date', requestDate || '');
             setValue('poster_Name', user.displayName || '');
+            setValue('Like', 0 || '');
         }
         document.getElementById('my_modal_5').showModal();
     };
@@ -102,6 +103,7 @@ const Post = () => {
                         <input type="hidden" {...register('poster_image')} />
                         <input type="hidden" {...register('Post_date')} />
                         <input type="hidden" {...register('poster_Name')} />
+                        <input type="hidden" {...register('Like')} />
                         <div className="flex items-center justify-around">
                             <button
                                 type="submit"

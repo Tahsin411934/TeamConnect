@@ -4,7 +4,7 @@ import UseAuth from "../../Hook/useAuth";
 const Sidebar2 = () => {
     const {logOut, user} = UseAuth();
     return (
-        <div className="rounded-2xl  h-full">
+        <div className="rounded-2xl fixed h-full">
             
             <div className="h-full p-3 rounded-2xl space-y-2 w-60 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
 	<div className="flex items-center p-2 space-x-4">

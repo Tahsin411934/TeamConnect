@@ -4,6 +4,8 @@ import {
 import Root from "../Root/Root";
 import Home from "../Components/Home/Home";
 import Signup from "../Components/Auth/SignUp/Signup";
+import Login from "../Components/Auth/Login/Login";
+import Network from "../Components/Network/Network";
 
   const router = createBrowserRouter([
     {
@@ -15,12 +17,22 @@ import Signup from "../Components/Auth/SignUp/Signup";
             element: <Home/>
         },
        
+        {
+          path:'/login',
+          element: <Login/>
+        },
+        {
+          path:'/network',
+          element: <Network/>
+        },
+       
       ]
     },
     {
       path:'/signup',
       element: <Signup/>
-    }
+    },
+   
   ]);
 
 

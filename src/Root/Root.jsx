@@ -12,12 +12,12 @@ const Root = () => {
 
     if (loading) {
         // set loading
-        return <div className="bg-[#2F7955] h-screen flex justify-center items-center">
+        return <div className="bg-[#0D2136] h-screen flex justify-center items-center">
             <div>
                 <span className=" text-white m-auto loading loading-spinner w-20"></span>
                 <div className="flex items-center justify-center  -ml-[30%]">
 
-                    <h1 className="mt-5 mr-10 tracking-widest text-[#FFFFFF] font-Prata font text-5xl">PLATE SWAP</h1>
+                    <h1 className="mt-5 mr-10 tracking-widest text-[#FFFFFF] font-Prata font text-5xl">Team Connect</h1>
                 </div>
             </div>
 
@@ -28,7 +28,7 @@ const Root = () => {
 
         <div>
             {
-                user ? (<div className="lg:grid grid-cols-11 gap-1 container mx-auto mt-3">
+                user ? (<div className="lg:grid grid-cols-11 gap-1 container mx-auto  bg-slate-700">
                     <div className="w-full h-full bg-[#111827] col-span-3  hidden rounded-2xl lg:flex justify-center ">
                         <div>
                         <div className="mr-10 text-center font-bold text-base flex-col justify-center mt-5 text-white items-center hover:bg-[#0D2136] rounded-xl p-3 ">
@@ -44,7 +44,7 @@ const Root = () => {
                         <Navbar></Navbar>
                         <Outlet />
                     </div>
-                    <div className="w-full h-full bg-slate-200 col-span-2 hidden lg:flex"> <Sidebar2></Sidebar2> </div>  </div>) : <Login />
+                    <div className="w-full h-full  bg-slate-200 col-span-2 hidden lg:flex"> <Sidebar2></Sidebar2> </div>  </div>) :  <Login></Login>
             }
         </div>
 

@@ -33,7 +33,7 @@ const AllPost = () => {
   return (
     <div className='bg-[#111827]'>
       {data.map(post => (
-        <SinglePost key={post._id} post={post} />
+        <SinglePost key={post._id} post={post} refetch={refetch} />
       ))}
     </div>
   );
