@@ -1,8 +1,3 @@
-# React + Vite
+# TeamConnect
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+TeamConnect is an innovative social media platform designed to bring teams, professionals, and communities together. Whether you're collaborating on a project, sharing industry insights, or building your professional network, TeamConnect provides a dynamic and user-friendly environment to foster connections and facilitate communication.
